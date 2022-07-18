@@ -1,7 +1,4 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+# This is the script to convert from 32-bit integers to fixed point numbers
 import numpy as np
 
 def intToHex(integer):
@@ -36,8 +33,7 @@ def intToHex(integer):
 
     return ret
 
-def intToFxp(integer):
-    hex = intToHex(integer)
+def hexToFxp(hex):
     ret = 0.0
     hexToIntDict = {}
     digit = ord('0')
@@ -61,6 +57,9 @@ def intToFxp(integer):
         return ret
 
     return ret
+
+def intToFxp(integer):
+    return hexToFxp(intToHex(integer))
 
 def compute(audio_in):
     conf_8_int = np.int32(39413)  # 08: cfg_cos_alpha
