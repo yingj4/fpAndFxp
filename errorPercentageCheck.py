@@ -2,6 +2,7 @@
 from ro_4 import *
 from intToFxp import *
 from fpToInt import *
+from ro_accOut import *
 
 def inputCheck():
     # error checking for the configurations input
@@ -125,5 +126,12 @@ def inputCheck():
     print("min error_in: " + str(min(error_in)))
     print("max error_in: " + str(max(error_in)))
 
+def outputCheck(accOut):
+    return len(accOut)
+
 if __name__ == '__main__':
-    inputCheck()
+    # inputCheck()
+    outputCheck(accOut_0)
+    # outputCheck(accOut_1)
+    # outputCheck(accOut_2)
+    # outputCheck(accOut_3)
