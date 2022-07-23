@@ -1,5 +1,8 @@
 # This file contains the output of the rotate order accelerator from 4 different audio blocks.
 
+# Baseline
+baseline = []
+
 # Block 0
 accOut_0 = [
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

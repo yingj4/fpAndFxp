@@ -5,7 +5,7 @@ from fpToInt import *
 from ro_accOut import *
 
 def inputCheck():
-    # error checking for the configurations input
+    # error percentage checking for the configurations input
     error_conf = []
     conf_8_fxp = intToFxp(fpToInt(conf_8_0))
     conf_9_fxp = intToFxp(fpToInt(conf_9_0))
@@ -103,6 +103,7 @@ def inputCheck():
     for i in range(len(error_conf)):
         error_conf_abs.append(abs(error_conf[i]))
 
+    print("Configurations")
     print("avg error_conf_abs: " + str(sum(error_conf_abs) / len(error_conf_abs)))
     print("max error_conf_abs: " + str(max(error_conf_abs)))
     print("min error_conf: " + str(min(error_conf)))
@@ -121,17 +122,43 @@ def inputCheck():
     for i in range(len(error_in)):
         error_in_abs.append(abs(error_in[i]))
 
+    print("Input array")
     print("avg error_in_abs: " + str(sum(error_in_abs) / len(error_in_abs)))
     print("max error_in_abs: " + str(max(error_in_abs)))
     print("min error_in: " + str(min(error_in)))
     print("max error_in: " + str(max(error_in)))
 
 def outputCheck(accOut):
-    return len(accOut)
+    # error percentage checking for the output array
+    error_out = []
+    for i in range(0, len(accOut)):
+        fxp = intToFxp(accOut[i])
+    if fxp != baseline[i]:
+        error_out.append((fxp - baseline[i]) / baseline[i])
+    else:
+        error_out.append(0.0)
+
+    error_out_abs = []
+    for i in range(len(error_out)):
+        error_out_abs.append(abs(error_out[i]))
+
+    print("Output array")
+    if accOut is accOut_0:
+        print("Block 0")
+    elif accOut is accOut_1:
+        print("Block 1")
+    elif accOut is accOut_2:
+        print("Block 2")
+    elif accOut is accOut_3:
+        print("Block 3")
+    print("avg error_out_abs: " + str(sum(error_out_abs) / len(error_out_abs)))
+    print("max error_out_abs: " + str(max(error_out_abs)))
+    print("min error_out: " + str(min(error_out)))
+    print("max error_out: " + str(max(error_out)))
 
 if __name__ == '__main__':
     # inputCheck()
     outputCheck(accOut_0)
-    # outputCheck(accOut_1)
-    # outputCheck(accOut_2)
-    # outputCheck(accOut_3)
+    outputCheck(accOut_1)
+    outputCheck(accOut_2)
+    outputCheck(accOut_3)
