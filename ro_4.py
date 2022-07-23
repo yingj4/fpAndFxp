@@ -1,3 +1,5 @@
+# This file contains the inputs and outputs of rotate order function from pure software. It has the data for 4 audio blocks from the ILLIXR audio decoder.
+
 conf_8_0 = -0.000000
 conf_9_0 = -1.000000
 conf_10_0 = 0.999991

@@ -34,6 +34,7 @@ def intToHex(integer):
     return ret
 
 def hexToFxp(hex):
+    print(hex)
     ret = 0.0
     hexToIntDict = {}
     digit = ord('0')
@@ -53,6 +54,7 @@ def hexToFxp(hex):
         ret += -1.0 * (2 ** 12)
         for i in range(1, 8):
             ret += hexToIntDict[hex[i]] * (2 ** (12 - 4 * i))
+            print(ret)
     else:
         return ret
 
@@ -270,5 +272,3 @@ if __name__ == '__main__':
             error += 1
 
     print(error)
-
-
