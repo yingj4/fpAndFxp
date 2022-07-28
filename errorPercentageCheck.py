@@ -128,7 +128,7 @@ def inputCheck():
     print("min error_in: " + str(min(error_in)))
     print("max error_in: " + str(max(error_in)))
 
-def outputCheck(accOut):
+def outputCheck(baseline, accOut):
     # error percentage checking for the output array
     error_out = []
     for i in range(0, len(accOut)):
@@ -158,7 +158,7 @@ def outputCheck(accOut):
 
 if __name__ == '__main__':
     # inputCheck()
-    outputCheck(accOut_0)
-    outputCheck(accOut_1)
-    outputCheck(accOut_2)
-    outputCheck(accOut_3)
+    outputCheck(baseline_0, accOut_0)
+    outputCheck(baseline_1, accOut_1)
+    outputCheck(baseline_2, accOut_2)
+    outputCheck(baseline_3, accOut_3)
