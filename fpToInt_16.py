@@ -1,6 +1,6 @@
 # This is the script to convert from floating point nubmers to 32-bit integers
 from ro_4 import *
-from intToFxp import *
+from intToFxp_16 import *
 
 def fpToHex(fp):
     m = dict.fromkeys(range(16), 0)

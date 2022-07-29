@@ -1,8 +1,9 @@
 # This is the file to check the error percentage
 from ro_4 import *
-from intToFxp import *
-from fpToInt import *
-from ro_accOut import *
+from intToFxp_16 import *
+from fpToInt_16 import *
+from ro_accOut_16 import *
+from ro_4 import *
 
 def inputCheck():
     # error percentage checking for the configurations input
@@ -128,15 +129,35 @@ def inputCheck():
     print("min error_in: " + str(min(error_in)))
     print("max error_in: " + str(max(error_in)))
 
-def outputCheck(baseline, accOut):
+def outputCheck(baseline, accOut, type):
     # error percentage checking for the output array
     error_out = []
+
+    if type == "all":
+        print("The error percentage for all values")
+    elif type == "smallFilter":
+        print("The error percentage after filtering out small numbers")
+
     for i in range(0, len(accOut)):
         fxp = intToFxp(accOut[i])
-    if fxp != baseline[i]:
-        error_out.append((fxp - baseline[i]) / baseline[i])
-    else:
-        error_out.append(0.0)
+        if type == "all":
+            if fxp != baseline[i] and baseline[i] == 0:
+                if fxp > 0:
+                    error_out.append(9999.99)   # Infinity
+                else:
+                    error_out.append(-9999.99)  # Negative infinity
+            elif fxp != baseline[i] and baseline[i] != 0:
+                error_out.append((fxp - baseline[i]) / baseline[i])
+            else:
+                error_out.append(0.0)
+        elif type == "smallFilter":
+            if baseline[i] == 0 or baseline[i] == 1e-6 or baseline[i] == -1e-6:
+                continue
+
+            if fxp != baseline[i] and baseline[i] != 0:
+                error_out.append((fxp - baseline[i]) / baseline[i])
+            else:
+                error_out.append(0.0)
 
     error_out_abs = []
     for i in range(len(error_out)):
@@ -155,10 +176,32 @@ def outputCheck(baseline, accOut):
     print("max error_out_abs: " + str(max(error_out_abs)))
     print("min error_out: " + str(min(error_out)))
     print("max error_out: " + str(max(error_out)))
+    print(baseline[error_out.index(min(error_out))])
+    print(baseline[error_out.index(max(error_out))])
 
 if __name__ == '__main__':
     # inputCheck()
-    outputCheck(baseline_0, accOut_0)
-    outputCheck(baseline_1, accOut_1)
-    outputCheck(baseline_2, accOut_2)
-    outputCheck(baseline_3, accOut_3)
+
+    '''
+    Check the error percentage for all the output values
+    '''
+    outputCheck(baseline_0, accOut_0, "all")
+    outputCheck(baseline_1, accOut_1, "all")
+    outputCheck(baseline_2, accOut_2, "all")
+    outputCheck(baseline_3, accOut_3, "all")
+
+    '''
+    Check the error percentage after filtering out 0, 1e-6, and -1e-6
+    '''
+    outputCheck(baseline_0, accOut_0, "smallFilter")
+    outputCheck(baseline_1, accOut_1, "smallFilter")
+    outputCheck(baseline_2, accOut_2, "smallFilter")
+    outputCheck(baseline_3, accOut_3, "smallFilter")
+
+    print("Input/Output Range")
+    print("Input")
+    print(min(min(originalChannel_in_0), min(originalChannel_in_1), min(originalChannel_in_2), min(originalChannel_in_3)))
+    print(max(max(originalChannel_in_0), max(originalChannel_in_1), max(originalChannel_in_2), max(originalChannel_in_3)))
+    print("Output")
+    print(min(min(originalChannel_out_0), min(originalChannel_out_1), min(originalChannel_out_2), min(originalChannel_out_3)))
+    print(max(max(originalChannel_out_0), max(originalChannel_out_1), max(originalChannel_out_2), max(originalChannel_out_3)))
