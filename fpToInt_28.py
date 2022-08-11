@@ -22,8 +22,6 @@ def fpToHex(fp):
     if fp < 0:
         fp += 2 ** 4
 
-    print(fp)
-
     fractional = fp % 1
     integral = fp - fractional
 
@@ -73,9 +71,6 @@ def fpToInt(fp):
 
 if __name__ == '__main__':
     print(fpToInt(conf_8_1))
-    print("\n")
     print(fpToInt(conf_9_1))
-    print("\n")
     print(fpToInt(conf_10_1))
-    print("\n")
     print(fpToInt(conf_11_1))
