@@ -1,4 +1,5 @@
 # This is the script to convert from floating point nubmers to 32-bit integers
+# The number of fractional bits is 16
 from ro_4 import *
 from intToFxp_16 import *
 
@@ -78,11 +79,39 @@ def hexToInt(hex):
             hexToIntDict[chr(c)] = np.int32(i)
             c += 1
 
-    if hex[0] == '0':
+    if ord(hex[0]) >= ord('0') and ord(hex[0]) <= ord('7'):
         for i in range(8):
             ret += hexToIntDict[hex[i]] * (2 ** (28 - 4 * i))
+    elif hex[0] == '8':
+        ret += -2 ** 31
+        for i in range(1, 8):
+            ret += hexToIntDict[hex[i]] * (2 ** (28 - 4 * i))
+    elif hex[0] == '9':
+        ret += -2 ** 31 + 2 ** 28
+        for i in range(1, 8):
+            ret += hexToIntDict[hex[i]] * (2 ** (28 - 4 * i))
+    elif hex[0] == 'a':
+        ret += -2 ** 31 + 2 ** 29
+        for i in range(1, 8):
+            ret += hexToIntDict[hex[i]] * (2 ** (28 - 4 * i))
+    elif hex[0] == 'b':
+        ret += -2 ** 31 + 2 ** 29 + 2 ** 28
+        for i in range(1, 8):
+            ret += hexToIntDict[hex[i]] * (2 ** (28 - 4 * i))
+    elif hex[0] == 'c':
+        ret += -2 ** 31 + 2 ** 30
+        for i in range(1, 8):
+            ret += hexToIntDict[hex[i]] * (2 ** (28 - 4 * i))
+    elif hex[0] == 'd':
+        ret += -2 ** 31 + 2 ** 30 + 2 ** 28
+        for i in range(1, 8):
+            ret += hexToIntDict[hex[i]] * (2 ** (28 - 4 * i))
+    elif hex[0] == 'e':
+        ret += -2 ** 31 + 2 ** 30 + 2 ** 29
+        for i in range(1, 8):
+            ret += hexToIntDict[hex[i]] * (2 ** (28 - 4 * i))
     elif hex[0] == 'f':
-        ret += -2 ** 28
+        ret += -2 ** 31 + 2 ** 30 + 2 ** 29 + 2 ** 28
         for i in range(1, 8):
             ret += hexToIntDict[hex[i]] * (2 ** (28 - 4 * i))
     else:

@@ -1,4 +1,5 @@
 # This is the file to check the error percentage
+# The number of fractional bits is 16
 from ro_4 import *
 from intToFxp_16 import *
 from fpToInt_16 import *

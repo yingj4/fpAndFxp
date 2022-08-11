@@ -1,4 +1,5 @@
 # This is the script to convert from 32-bit integers to fixed point numbers
+# The number of fractional bits is 16
 import numpy as np
 
 def intToHex(integer):
