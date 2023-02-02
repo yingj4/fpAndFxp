@@ -70,7 +70,11 @@ def fpToInt(fp):
     return hexToInt(fpToHex(fp))
 
 if __name__ == '__main__':
-    print(fpToInt(conf_8_1))
-    print(fpToInt(conf_9_1))
-    print(fpToInt(conf_10_1))
-    print(fpToInt(conf_11_1))
+    # print(fpToInt(conf_8_1))
+    # print(fpToInt(conf_9_1))
+    # print(fpToInt(conf_10_1))
+    # print(fpToInt(conf_11_1))
+    print(fpToInt(1.0))
+    print(fpToInt(0.5))
+    print(fpToInt(2.0))
+    print(fpToInt(0.0))
